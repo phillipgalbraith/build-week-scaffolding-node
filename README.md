@@ -94,28 +94,21 @@ The following demo explains how to set up a project using PostgreSQL and Heroku.
 
 
 
-TABLES
-
-CREATE TABLE users(
-    id SERIAL
-);
+## TABLES
 
 
 CREATE TABLE recipes(
     id SERIAL
 );
+## POSTGRES sessions stack
+npm install express-sessions
+npm install connect-pg-simple
 
-
-CREATE TABLE users(
-    id SERIAL
-);
-
-
-CREATE TABLE users(
-    id SERIAL
-);
-
-
-CREATE TABLE users(
-    id SERIAL
-);
+CREATE TABLE "session" (
+  "sid" varchar NOT NULL COLLATE "default",
+  "sess" json NOT NULL,
+  "expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+CREATE INDEX "IDX_session_expire" ON "session" ("expire");

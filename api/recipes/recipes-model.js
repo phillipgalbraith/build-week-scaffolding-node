@@ -9,7 +9,34 @@ async function insertRecipe(recipe) {
 
 function getAllRecipes() { return db('recipes') }
 
+async function getCategoryRecipes(category_name) {
+    const recipes = await db('recipes').where('category', category_name)
+    return recipes
+}
+
+async function deleteRecipe(recipe_id) {
+  await db('recipes').where('recipe_id', recipe_id)
+    .del()
+  return db('recipes')
+}
+
+async function updateRecipe(recipe) {
+  const {
+    recipe_id,
+    instructions,
+    title,
+    source,
+   } = recipe
+   
+  return db('recipes')
+  .where('recipe_id', recipe_id)
+  .update({ instructions: instructions, title: title, source: source}, ['instructions', 'title', 'source'])
+}
+
 module.exports = {
     insertRecipe,
-    getAllRecipes
+    getAllRecipes,
+    getCategoryRecipes,
+    deleteRecipe,
+    updateRecipe
 }

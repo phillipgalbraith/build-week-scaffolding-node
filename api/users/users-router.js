@@ -16,11 +16,11 @@ router.post('/', async (req, res) => {
   })
 // dev http :9000/api/users username=username4 password=password4
 
-// router.get('/:id', (req, res) => {
-//   // RETURN THE USER OBJECT
-//   // this needs a middleware to verify user id
-//   res.status(200).json(req.user);
-// });
+ router.get('/:id', (req, res) => {
+   // RETURN THE USER OBJECT
+   // this needs a middleware to verify user id
+   res.status(200).json(req.user);
+ });
 
 // router.post('/', async (req, res) => {
 //   // RETURN THE NEWLY CREATED USER OBJECT
